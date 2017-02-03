@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+	<div class="container">TODO write content</div>
+	<script>
+	    //引入混入
+	  
+	    var myModule=(function(jQ,_){
+		function privateMethod1(){
+		    jQ(".container").html("test");
+		}
+//		function privateMethod2(){
+//		    console.log(_.min([10,5,100,2,1000]));
+//		}
+		return {
+		    publicMethod:function(){
+			privateMethod1();
+//			privateMethod2();
+		    }
+		};
+	    })($);
+	    
+	    myModule.publicMethod();
+	    
+	    var myModule2=(function(){
+		var module={},
+		;
+		
+	    })();
+	</script>
+    </body>
+</html>

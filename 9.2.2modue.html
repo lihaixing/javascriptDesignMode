@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>modue</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<script>
+	    var testModule = (function () {
+		var counter = 0;
+		return {
+		    incrementCounter: function () {
+			return ++counter;
+		    },
+		    resetCounter: function () {
+			console.log("counter value prior to reset:" + counter);
+			counter = 0;
+		    }
+		};
+	    })();
+	    console.log(testModule.incrementCounter());//1
+	    testModule.resetCounter();//counter value prior to reset:1
+
+	    var myNamespace = (function () {
+		var myPrivateVar = 0;
+		var myPrivateMethod = function (foo) {
+		    console.log(foo);
+		};
+		return {
+		    myPublicVar: 'foo',
+		    myPublicFunction: function (bar) {
+			myPrivateVar++;
+			myPrivateMethod(bar);
+		    }
+		}
+	    })();
+	    console.log(myNamespace);
+	    console.log(myNamespace.myPublicVar);//foo
+	    myNamespace.myPublicFunction(45);//45
+
+	    var basketModule = (function () {
+		//私有
+		var basket = [];
+		function doSomethingPrivate() {
+		    console.log(basket);
+		}
+		function doSomethingElsePrivate() {
+		    //...
+		}
+		return {
+		    //添加item到购物车
+		    addItem: function (values) {
+			basket.push(values);
+		    },
+		    getItemCount: function () {
+			return basket.length;
+		    },
+		    //私有函数的共有形式别名
+		    doSomething: doSomethingPrivate,
+		    //获取购物车里所有item的价格总值 
+		    getTotal: function () {
+			var itemCount = this.getItemCount(),
+				total = 0;
+			while (itemCount--) {
+			    total += basket[itemCount].price;
+			}
+			return total;
+		    }
+		}
+	    })();
+	    basketModule.addItem({
+		item:'bread',
+		price:0.5
+	    });
+	    basketModule.addItem({
+		item:'butter',
+		price:0.3
+	    });
+	    console.log(basketModule.getItemCount());//2
+	    basketModule.doSomething();
+	    console.log(basketModule.basket);//undefined
+	    console.log(basketModule.getTotal());
+
+
+
+	</script>
+    </body>
+</html>

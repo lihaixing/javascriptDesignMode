@@ -34,10 +34,19 @@ and open the template in the editor.
 	    myModule.publicMethod();
 	    
 	    var myModule2=(function(){
-		var module={},
-		;
-		
+		var module={},privateVar="hello word";
+		function privateMethod(){
+		    
+		}
+		module.publicProperty="Foobar";
+		module.publicMethod=function(){
+		    console.log(privateVar);
+		};
+		return module;
 	    })();
+	    
+	    console.log(myModule2.publicProperty);
+	    myModule2.publicMethod();
 	</script>
     </body>
 </html>

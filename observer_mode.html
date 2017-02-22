@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<button id="addNewObserver">Add New Observer checkbox</button>
+	<input id="mainCheckbox" type="checkbox">
+	<div id="observersContainer"></div>
+	<script>
+	    //观察这模式就是一个对象维持一系列依赖于它的对象，将有关状态的任何变更通知给它们
+	    function ObserverList() {
+		this.observerList = [];
+	    }
+
+	    ObserverList.prototype = {
+		Add: function (obj) {
+		    return this.observerList.push(obj);
+		},
+		Empty: function () {
+		    this.observerList = [];
+		},
+		Count: function () {
+		    return this.observerList.length;
+		},
+		Get: function (index) {
+		    if (index > -1 && index < this.observerList.length) {
+			return this.observerList[index];
+		    }
+		},
+		Insert: function (obj, index) {
+		    var pointer = -1;
+		    if (index === 0) {
+			this.observerList.unshift(obj);
+			pointer = index;
+		    } else if (index === this.observerList.length) {
+			this.observerList.push(obj);
+			pointer = index;
+		    }
+		    return pointer;
+		},
+		IndexOf: function (obj, startIndex) {
+		    var i = startIndex, pointer = -1;
+		    while (i < this.observerList.length) {
+			if (this.observerList[i] === obj) {
+			    pointer = i;
+			}
+			i++;
+		    }
+		    return pointer;
+		},
+		RemoveIndexAt: function (index) {
+		    if (index === 0) {
+			this.observerList.shift();
+		    } else if (index === this.observerList.length - 1) {
+			this.observerList.pop();
+		    } else {
+			this.observerList.splice(index);
+		    }
+		}
+	    };
+
+	    function Subject() {
+		this.observers = new ObserverList();
+	    }
+
+	    Subject.prototype = {
+		AddObserver: function (observer) {
+		    this.observers.Add(observer);
+		},
+		RemoveObserver: function (observer) {
+		    this.observers.removeIndexAt(this.observers.indexOf(observer, 0));
+		},
+		Notify: function (context) {
+		    var observerCount = this.observers.Count();
+		    for (var i = 0; i < observerCount; i++) {
+			this.observers.Get(i).Update(context);
+		    }
+		}
+	    };
+	    
+	    //扩展对象
+	    function extend(obj, extension) {
+		for (var key in obj) {
+		    extension[key] = obj[key];
+		}
+	    }
+
+	    function Observer() {
+		this.Update = function () {
+
+		};
+	    }
+
+	    var controlcheckbox = document.getElementById("mainCheckbox"),
+		    addBtn = document.getElementById("addNewObserver"),
+		    container = document.getElementById("observersContainer");
+
+	    //具体目标Concrete Subject
+	    extend(new Subject(), controlcheckbox);
+	    //new Function和function 意义一样
+	    controlcheckbox["onclick"] = new Function("controlcheckbox.Notify(controlcheckbox.checked)");
+
+	    addBtn["onclick"]=AddNewObserver;
+	    
+	    function AddNewObserver(){
+		var check=document.createElement("input");
+		check.type="checkbox";
+		extend(new Observer(),check);
+		check.Update=function(value){
+		    this.checked=value;
+		};
+		controlcheckbox.AddObserver(check);
+		
+		container.appendChild(check);
+	    }
+	</script>
+    </body>
+</html>

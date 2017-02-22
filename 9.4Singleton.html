@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<script>
+	    var mySingleton=(function(){
+		var instance;
+		function init(){
+		    var privateRandomNumber=Math.random();
+		    return {
+			getRandomNumber:function(){
+			    return privateRandomNumber;
+			}
+		    };
+		}
+		
+		return {
+		    getInstance:function(){
+			if(!instance){
+			    instance=init();
+			}
+			return instance;
+		    }
+		};
+	    })();
+	    
+	    var myBadSingleton=(function(){
+		var instance;
+		function init(){
+		    var privateRandomNumber=Math.random();
+		    return {
+			getRandomNumber:function(){
+			    return privateRandomNumber;
+			}
+		    };
+		}
+		return {
+		    getInstance:function(){
+			instance=init();
+			return instance;
+		    }
+		};
+	    })();
+	    
+	    var singleA=mySingleton.getInstance();
+	    var singleB=mySingleton.getInstance();
+	    console.log(singleA.getRandomNumber());
+	    console.log(singleB.getRandomNumber());
+	    
+	    var badSingleA=myBadSingleton.getInstance();
+	    var badSingleB=myBadSingleton.getInstance();
+	    console.log(badSingleA.getRandomNumber());
+	    console.log(badSingleB.getRandomNumber());
+	    
+	    var mySingletonB=(function(){
+		var instance;
+		return {
+		    getInstance:function(){
+			if(this._instance==null){
+			    if(isFoo()){
+				this._instance=new FooSingleton();
+			    }else{
+				this._instance=new BasicSingleton();
+			    }
+			}
+			return this._instance;
+		    }
+		};
+	    })();
+	    
+	    var SingletonTester=(function(){
+		function Singleton(options){
+		    options=options||{};
+		    this.name="SingletonTester";
+		    this.pointX=options.pointX||6;
+		    this.pointY=options.pointY||10;
+		}
+		
+		var instance;
+		var _static={
+		    name:"SingletonTester",
+		    getInstance:function(options){
+			if(instance===undefined){
+			    instance=new Singleton(options);
+			}
+			return instance;
+		    }
+		};
+		return _static;
+	    })();
+	    var singletonTest=SingletonTester.getInstance({pointX:5});
+	    console.log(singletonTest);
+	</script>
+    </body>
+</html>
+

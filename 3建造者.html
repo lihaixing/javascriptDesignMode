@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<script>
+	    //指挥者：白富美的需求：房子
+	    function Fangzi() {
+		this.woshi = "";
+		this.keting = "";
+		this.chufang = "";
+	    }
+	    //建造者：包工头 只是一个接口，不干活
+	    function Baogongtou(){
+		this.gaifangzi=function(gongren){
+		    gongren.jian_woshi();
+		    gongren.jian_keting();
+		    gongren.jian_chufang();
+		};
+	    }
+	    //工人：通过各种方法盖房子
+	    function Gongren(){
+		this.jian_woshi=function(){
+		    console.log("卧室建好了");
+		};
+		this.jian_keting=function(){
+		    console.log("客厅建好了");
+		};
+		this.jian_chufang=function(){
+		    console.log("厨房建好了");
+		};
+		this.jiaogong=function(){
+		    //单例模式
+		    var _fangzi=new Fangzi();
+		    _fangzi.woshi="ok";
+		    _fangzi.keting="ok";
+		    _fangzi.chufang="ok";
+		    return _fangzi;
+		};
+	    }
+	    var gongren=new Gongren();//待命
+	    var baogongtou=new Baogongtou();
+	    baogongtou.gaifangzi(gongren);
+	    var myfangzi=gongren.jiaogong();
+	    console.log(myfangzi);
+	</script>
+    </body>
+</html>

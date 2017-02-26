@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<script type="text/javascript">
+//	    造人模板
+	    function shangdi() {}
+	    shangdi.prototype.zaoren_yanjing = function () {
+		console.log("眼睛");
+	    };
+	    shangdi.prototype.zaoren_bizi = function () {
+		console.log("鼻子");
+	    };
+	    shangdi.prototype.zaoren_zuiba = function () {
+		console.log("嘴巴");
+	    };
+	    shangdi.prototype.aihao = function (first_argument) {
+		throw new Error("我只是个钩子，需要你自己去探索");
+	    };
+//小明
+	    function xiaoming() {
+		console.log("小明是上帝的子类");
+		//这是为了继承shangdi中的东西，如果通过原型去继承，相当于共享了
+		shangdi.call(this);
+	    }
+	    xiaoming.prototype = new shangdi();
+	    xiaoming.prototype.aihao = function () {
+		console.log('我喜欢吃西瓜');
+
+	    };
+	    var xiaoming = new xiaoming();
+
+	</script>
+    </body>
+</html>

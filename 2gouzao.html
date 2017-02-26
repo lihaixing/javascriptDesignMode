@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<meta charset="utf-8">
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<script>
+	    var AA = {
+		zaomen: function (huawen) {
+		    if (!(this instanceof AA.zaomen)) {
+			return new AA.zaomen(huawen);
+		    }
+		    var _huawen = "普通";
+		    if (huawen) {
+			_huawen = huawen;
+		    }
+		    this.suo = "普通";
+		    this.huawen = _huawen;
+		    this.create = function () {
+			return "[锁头]" + this.suo + "[花纹]" + this.huawen;
+		    };
+		}
+	    };
+	    var BB = {
+		zaomen: function (huawen) {
+		    if (!(this instanceof BB.zaomen)) {
+			return new BB.zaomen(huawen);
+		    }
+		    var _huawen = "普通";
+		    if (huawen) {
+			_huawen = huawen;
+		    }
+		    this.suo = "普通";
+		    this.huawen = _huawen;
+		    this.create = function () {
+			return "[锁头]" + this.suo + "[花纹]" + this.huawen;
+		    };
+		}
+	    };
+
+	    var xiaozhang = AA.zaomen();
+	    alert(xiaozhang.create());
+	    var xiaoli = new BB.zaomen("绚丽");
+	    alert(xiaoli.create());
+	</script>
+    </body>
+</html>

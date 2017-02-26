@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<script type="text/javascript">
+	    var fuhao = {
+	    };
+	    fuhao.huofang = function () {
+		return "馒头";
+	    };
+	    fuhao.culiliangshi = function () {
+		return "面粉";
+	    };
+	    fuhao.mantou = function () {
+		this.culiliangshi();
+		this.huofang();
+	    };
+	    //只要馒头，门里面怎么生产馒头，不管
+	    fuhao.men = function () {
+		return this.mantou();
+	    };
+
+
+	</script>
+    </body>
+</html>

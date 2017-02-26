@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+	<script type="text/javascript">
+	    var aa = {
+		test: function (argument) {
+		    //body
+		    console.log("我是test");
+		},
+		go: function () {
+		    console.log("我是gogo");
+		}
+	    };
+	    aa.test();
+	    //休假美好时光
+	    //。。。。。
+	    //代码被改了
+	    function bb() {
+		this.test = function () {
+		    console.log("我是新的test");
+		};
+	    }
+	    bb.prototype.gogo = function (first_argument) {
+		console.log("我是新的gogo");
+	    };
+	    //此时aa.test已经不管用了
+	    //适配器来了。。
+	    function shipeiqi() {
+		var x = new bb();
+		var aa = {
+		    test: function () {
+			x.test();
+		    },
+		    go: function (first_argument) {
+			x.gogo(first_argument);
+		    }
+		};
+		return aa;
+	    }
+	    var aa = shipeiqi();
+	    (new bb).test();
+	    aa.test();
+	</script>
+    </body>
+</html>

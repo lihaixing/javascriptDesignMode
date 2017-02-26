@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+	<div id="a">TODO write content</div>
+	<div id="d">TODO write content</div>
+	<script type="text/javascript">
+
+	    //建立两个对象，1个xiaowang 1个xiaoli
+	    //让xiaoli根xiaowang通过门铃通信
+	    //先看xiaowang家有没有门，如果有门直接通过门铃通讯didi，如果没有，先键门
+	    //两个单利开始通讯
+	    var xiaowang = function () {
+		var info = {}, men;
+		var xiaowangjia = function (message) {
+		    this.menling = message;
+		};
+		info.sendMessage = function (message) {
+		    if (!men) {
+			men = new xiaowangjia(message);
+			return men;
+		    }
+		};
+		return info;
+	    }();
+	    var xiaoli = {
+		callxiaowang: function (message) {
+		    var _xh = xiaowang.sendMessage(message);
+		    console.log(_xh.menling);
+		    _xh = null;//等待垃圾回收
+		}
+	    };
+	    xiaoli.callxiaowang("didi");
+
+	    //实战
+	    var Top = {
+		init: function () {
+		    this.render();
+		    this.bind();
+		},
+		a: 4,
+		//绑定dom元素
+		render: function () {
+		    var me = this;
+		    me.btna = $("#a");
+		},
+		//为dom元素绑定事件
+		bind: function () {
+		    var me = this;
+		    me.btna.click(function () {
+			//业务逻辑取出去
+			me.test();
+		    });
+		},
+		//test放业务逻辑
+		test: function () {
+		    console.log(this.a);
+		}
+	    };
+	    var banner = {
+		init: function () {
+		    this.render();
+		    this.bind();
+		},
+		d: 4,
+		render: function () {
+		    var me = this;
+		    me.btna = $("#d");
+		},
+		bind: function () {
+		    var me = this;
+		    me.btna.click(function () {
+			me.test();
+		    });
+		},
+		test: function () {
+		    d = 7;
+		    //通信
+		    Top.a = 9;
+		}
+	    };
+	    Top.init();
+	    banner.init();
+	</script>
+    </body>
+</html>

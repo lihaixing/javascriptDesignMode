@@ -14,34 +14,32 @@ and open the template in the editor.
     <body>
 	<div class="container">TODO write content</div>
 	<script>
-	    //引入混入
-	  
-	    var myModule=(function(jQ,_){
+//引入混入
+	    var myModule=(function(jQ){
 		function privateMethod1(){
 		    jQ(".container").html("test");
 		}
-//		function privateMethod2(){
-//		    console.log(_.min([10,5,100,2,1000]));
-//		}
 		return {
 		    publicMethod:function(){
 			privateMethod1();
-//			privateMethod2();
 		    }
 		};
 	    })($);
 	    
 	    myModule.publicMethod();
-	    
+//引出	    
 	    var myModule2=(function(){
-		var module={},privateVar="hello word";
+		var module={},
+		//私有
+		privateVar="hello word";
 		function privateMethod(){
-		    
 		}
+		//公有
 		module.publicProperty="Foobar";
 		module.publicMethod=function(){
 		    console.log(privateVar);
 		};
+		//引出module
 		return module;
 	    })();
 	    

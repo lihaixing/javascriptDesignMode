@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+	<form action="" id="myform">
+	    <div>
+		<input type="text" name="phone" data-reg="/^1[34578]\d{9}$/" data-reg_tip="手机号应为" data-require="1">
+		<span class="error"></span>
+	    </div>
+	    <div>
+		<input type="text" name="email" data-reg="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" data-reg_tip="邮箱应为">
+		<span class="error"></span>
+	    </div>
+	    <div>
+		<input type="password" name="password" data-reg="/^[a-zA-Z0-9]{8,16}$/" data-reg_tip="密码应为" data-require="1">
+		<span class="error"></span>
+	    </div>
+	    <div>
+		<input type="password" name="qpassword" data-reg="" data-same_tip="确认密码应一样" data-require="1">
+		<span class="error"></span>
+	    </div>
+	    <button id="btn_提交">按钮</button>
+	</form>
+	<script>
+//	    $(function () {
+	    function subject() {
+		this.observer = new observerlist();
+	    }
+
+	    subject.prototype.addobserver = function (ele) {
+		this.observer.addelement(ele);
+	    };
+
+	    subject.prototype.notity = function () {
+		var observerCount = this.observer.observerlist.length;
+		for (var i = 0; i < observerCount; i++) {
+		    var ele = this.observer.observerlist[i];
+
+		    ele.update($(ele).find("input").data('reg_tip'));
+		}
+	    };
+
+	    function observerlist() {
+		this.observerlist = [];
+	    }
+
+	    observerlist.prototype.addelement = function (ele) {
+		this.observerlist.push(ele);
+	    };
+
+	    function extend(obj1, obj2) {
+
+		for (var key in obj2) {
+		    obj1[key] = obj2[key];
+		}
+	    }
+	    extend($("#btn_提交")[0], new subject());
+
+	    function observer() {
+		this.update = function () {
+
+		};
+	    }
+
+	    var eleArr = $("#myform div");
+	    for (var i = 0; i < eleArr.length; i++) {
+		console.log(eleArr[i]);
+		extend(eleArr[i], new observer());
+		eleArr[i].update = function (error) {
+		    $(this).find(".error").text(error);
+		};
+		$("#btn_提交")[0].addobserver(eleArr[i]);
+	    }
+
+	    $("#btn_提交")[0].onclick = function () {
+		this.notity();
+		return false;
+	    };
+//	    });
+	</script>
+    </body>
+</html>

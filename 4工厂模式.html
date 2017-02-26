@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+	<div>TODO write content</div>
+	<script>
+
+	    //简单工厂
+	    var gongchang = {};
+	    gongchang.chanyifu = function () {
+		this.gongren = 50;
+		alert("我们有" + this.gongren);
+	    };
+	    gongchang.chanxie = function () {
+		alert("产鞋子");
+	    };
+	    gongchang.yunshu = function () {
+		alert("运输");
+	    };
+	    //接口
+	    gongchang.changzhang = function (para) {
+		return new gongchang[para]();//让厂长做什么
+	    };
+
+	    var me = gongchang.changzhang("chanyifu");//传递参数，拿到结果，不需要care过程
+	    alert(me.gongren);
+
+	    //抽象工厂
+	</script>
+    </body>
+</html>

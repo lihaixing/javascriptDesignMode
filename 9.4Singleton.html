@@ -13,6 +13,28 @@ and open the template in the editor.
     <body>
 	<div>TODO write content</div>
 	<script>
+//揭示模式 变量和方法全在私有里，公有只是引用
+	    var myRevealingModule=function(){
+		var privateCounter=0;
+		function privateFunction(){
+		    privateCounter++;
+		}
+		function publicFunction(){
+		    publicIncrement();
+		}
+		function publicIncrement(){
+		    privateFunction();
+		}
+		function publicGetCount(){
+		    return privateCounter;
+		}
+		return {
+		    start:publicFunction,
+		    increment:publicIncrement,
+		    count:publicGetCount
+		};
+	    }();
+//单例模式  只是实例化一次	    
 	    var mySingleton=(function(){
 		var instance;
 		function init(){
@@ -33,34 +55,6 @@ and open the template in the editor.
 		    }
 		};
 	    })();
-	    
-	    var myBadSingleton=(function(){
-		var instance;
-		function init(){
-		    var privateRandomNumber=Math.random();
-		    return {
-			getRandomNumber:function(){
-			    return privateRandomNumber;
-			}
-		    };
-		}
-		return {
-		    getInstance:function(){
-			instance=init();
-			return instance;
-		    }
-		};
-	    })();
-	    
-	    var singleA=mySingleton.getInstance();
-	    var singleB=mySingleton.getInstance();
-	    console.log(singleA.getRandomNumber());
-	    console.log(singleB.getRandomNumber());
-	    
-	    var badSingleA=myBadSingleton.getInstance();
-	    var badSingleB=myBadSingleton.getInstance();
-	    console.log(badSingleA.getRandomNumber());
-	    console.log(badSingleB.getRandomNumber());
 	    
 	    var mySingletonB=(function(){
 		var instance;

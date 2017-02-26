@@ -9,16 +9,32 @@ and open the template in the editor.
 	<title>modue</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/jquery-2.1.4.js"></script>
     </head>
     <body>
 	<div>TODO write content</div>
 	<script>
+//构造器模式
+	    function car(model, year, miles) {
+		this.model = model;
+		this.year = year;
+		this.miles = miles;
+	    }
+	    car.prototype.toString = function () {
+		//....
+	    };
+	    var civic = new Car("haixing", 2009, 20000);
+
+//Module(模块）模式	    
 	    var testModule = (function () {
+		//私有变量
 		var counter = 0;
 		return {
+		    //公有变量
 		    incrementCounter: function () {
 			return ++counter;
 		    },
+		    //公有方法
 		    resetCounter: function () {
 			console.log("counter value prior to reset:" + counter);
 			counter = 0;
@@ -77,12 +93,12 @@ and open the template in the editor.
 		}
 	    })();
 	    basketModule.addItem({
-		item:'bread',
-		price:0.5
+		item: 'bread',
+		price: 0.5
 	    });
 	    basketModule.addItem({
-		item:'butter',
-		price:0.3
+		item: 'butter',
+		price: 0.3
 	    });
 	    console.log(basketModule.getItemCount());//2
 	    basketModule.doSomething();
